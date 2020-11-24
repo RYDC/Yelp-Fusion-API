@@ -1,4 +1,6 @@
 var signedIn = false;
+var username = ""
+var password = ""
 var dohome = function(){ //Generate The Elements Of The Home Page
     //Clear the Work Space
     let workarea = document.getElementById("content");
@@ -65,12 +67,14 @@ function signUp(){//Creates UI for signing up
 
     //Username Input
     let usernameInput = document.createElement("input");
+    usernameInput.id = "usernameSignUp";
     usernameInput.classList = "form-control col-sm-2 d-flex justify-content-center";
     usernameInput.placeholder = "Username";
     container.appendChild(usernameInput);
 
     //Password Input
     let passwordInput = document.createElement("input");
+    passwordInput.id = "passwordSignUp";
     passwordInput.classList = "form-control col-sm-2 d-flex justify-content-center";
     passwordInput.placeholder = "Password";
     container2.appendChild(passwordInput);
@@ -107,12 +111,14 @@ function signIn(){//creates UI for signing in
 
     //Username Input
     let usernameInput = document.createElement("input");
+    usernameInput.id = "usernameSignIn";
     usernameInput.classList = "form-control col-sm-2 d-flex justify-content-center";
     usernameInput.placeholder = "Username";
     container.appendChild(usernameInput);
 
     //Password Input
     let passwordInput = document.createElement("input");
+    passwordInput.id = "passwordSignIn"
     passwordInput.classList = "form-control col-sm-2 d-flex justify-content-center";
     passwordInput.placeholder = "Password";
     container2.appendChild(passwordInput);
@@ -123,26 +129,70 @@ function signIn(){//creates UI for signing in
     signInButton2.innerHTML = "Sign In"
     container3.appendChild(signInButton2);
 
-    document.getElementById('signIn2').addEventListener('click', serverSignIn, false);
+    document.getElementById('signIn2').addEventListener('click', serverSignIn(), false);
 }
 
 function serverSignUp() {
     console.log("Starting Server Sign Up");
+    var password = document.getElementById("passwordSignUp").value;
+    var username = document.getElementById("usernameSignUp").value;
     var url = "https://lamp.cse.fau.edu/~dbenne11/whendiagram/add_user.php?username="+username+"&pw="+password //Kudos to Daniel for providing an alternative to OAuth
-    xmlRequest(url,onGoodRequest,onBadRequest);
+    console.log(url);
+    xmlRequest(url,onGoodSignUpRequest,onBadSignUpRequest);
 }
 
-function onGoodRequest(data){
-    console.log("Good Request");
-    if(data.accout_creation == success){
-
+function serverSignIn() {
+    console.log("Starting Server Sign In");
+    if(document.getElementById("usernameSignUp").value != ""){
+        username = document.getElementById("usernameSignUp").value;
     }else {
-    
+        username = document.getElementById("usernameSignIn").value;
+    }
+
+    if(document.getElementById("usernameSignUp").value != ""){
+        password = document.getElementById("passwordSignUp").value;
+    }else {
+        password = document.getElementById("passwordSignIn").value;
+    }  
+
+    var url = "https://lamp.cse.fau.edu/~dbenne11/whendiagram/login.php?username="+username+"&pw="+password;
+    console.log(url);
+    xmlRequest(url,onGoodSignInRequest,onBadSignInRequest);
+}
+
+function onGoodSignUpRequest(data){
+    console.log("Good Request");
+    console.log(data.account_creation);
+    if(data.account_creation == "success"){
+        serverSignIn();
+    }else {
+        console.log("Bad Sign Up Request");
     }
 }
 
-function onBadRequest(){
+function onBadSignUpRequest(){
     console.log("Bad Request");
+}
+
+function onGoodSignInRequest(data) {
+    console.log("Good Sign In Detected");
+    console.log(data.login);
+    if(data.login == "success"){
+        let workarea = document.getElementById("currentuser");
+        let p = document.createElement("p");
+        if(document.getElementById("usernameSignUp") != ""){
+        p.innerHTML = document.getElementById("usernameSignUp").value;
+        }else {
+            p.innerHTML = document.getElementById("usernameSignIn").value;
+        }
+        workarea.appendChild(p);
+    }else {
+        console.log("Bad Login");
+    }
+}
+
+function onBadSignInRequest(){
+    console.log("Bad SignInRequest");
 }
 
 function xmlRequest(url,onSuccess,onFailure){
