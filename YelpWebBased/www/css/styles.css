@@ -1,0 +1,35 @@
+body {
+    background-image:url(assets/background.png);
+    background-size:400px 400px;
+}
+
+.headerStyles {
+    background-image:url(assets/bannerbackground.png);
+    color:white;
+    height:25%;
+}
+
+footer p {
+    padding-top:12.5px;
+    padding-right:2px;
+}
+
+#dropdownmenu {
+    margin-top:-45px;
+    margin-right:20px;
+    margin-left:10px;
+    padding-left:5px;
+}
+
+.dropdownBackground {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden; 
+}
+
+.marginLeftAndRight {
+    margin-left:20px;
+    margin-right:20px;
+}
