@@ -105,7 +105,7 @@ function serverSignIn() {//Request a Sign In through API
     xmlRequest(url,onGoodSignInRequest,onBadSignInRequest);
 }
 
-function onGoodSignInRequest(data) {//Handler for a good sign in request
+function onGoodSignInRequest(data) {//Handler for a good signin request
     console.log("Good Sign In Detected");
     console.log(data.login);
     if(data.login == "success"){
@@ -124,7 +124,7 @@ function onGoodSignInRequest(data) {//Handler for a good sign in request
     }
 }
 
-function onGoodSignUpRequest(data){//Handler for a good sign up request
+function onGoodSignUpRequest(data){//Handler for a good signup request
     console.log("Good Request");
     console.log(data.account_creation);
     if(data.account_creation == "success"){
@@ -134,11 +134,11 @@ function onGoodSignUpRequest(data){//Handler for a good sign up request
     }
 }
 
-function onBadSignUpRequest(){//Handler for a bad sign up request
+function onBadSignUpRequest(){//Handler for a bad signup request
     console.log("Bad SignUpRequest");
 }
 
-function onBadSignInRequest(){//Handler for a good sign in request
+function onBadSignInRequest(){//Handler for a good signin request
     console.log("Bad SignInRequest");
 }
 
