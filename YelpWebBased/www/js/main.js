@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(){
-    document.getElementById('signOut').addEventListener('click', dohome, false);
+    dohome();
+    document.getElementById('signOut').addEventListener('click', signOut, false);
     document.getElementById('search').addEventListener('click', dosearch, false);
 });
