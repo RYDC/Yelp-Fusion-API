@@ -118,6 +118,10 @@ function onGoodSignInRequest(data) {//Handler for a good signin request
             p.innerHTML = document.getElementById("username").value;
         }
         workarea.appendChild(p);
+        document.getElementById("favorites").disabled = false;
+        document.getElementById("search").disabled = false;
+        document.getElementById("signout").disabled = false;
+        sessionStorage.setItem("username",document.getElementById("username").value)
         dosearch();
     }else {
         alert("Bad Login");

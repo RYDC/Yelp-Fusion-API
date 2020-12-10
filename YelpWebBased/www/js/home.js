@@ -45,21 +45,8 @@ var dohome = function(){ //Generate The UI Of The Home Page
 
     document.getElementById('signIn').addEventListener('click', signIn, false);
     document.getElementById('signUp').addEventListener('click', signUp, false);
-}
 
-function xmlRequest(url,onSuccess,onFailure){
-    var request = new XMLHttpRequest();
-
-    request.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          onSuccess(JSON.parse(this.responseText));        
-        }
-        else if(this.readyState == 4){
-            onFailure(this.status);
-        }
-      };
-
-    request.open("GET", url, true);
-    request.send();
-    
+    document.getElementById("favorites").disabled = true;
+    document.getElementById("search").disabled = true;
+    document.getElementById("signout").disabled = true;
 }
