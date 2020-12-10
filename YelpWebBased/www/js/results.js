@@ -12,7 +12,7 @@ var doresults = function(data) {//Print the Results of the search
         
         for(var i = 0;i<data.businesses.length;i++){
                 //Create container for business
-                let li = document.createElement("ul");
+                let li = document.createElement("li");
                 li.classList = "list-group-item";
                 ul.appendChild(li);
 
@@ -46,23 +46,30 @@ var doresults = function(data) {//Print the Results of the search
         
 }
 
-function favoriteItem() {
-        //var _this = this;
-        //console.log(this.getAttribute("id"));
+function favoriteItem() {//Favorite an item and unfavorite an item
         var username = sessionStorage.getItem("username");
         var id = this.getAttribute("id");
         var user_data = localStorage.getItem(username);
-        if (!user_data) {
+        //console.log(user_data);
+        let isAdded = false; //Checker to see if an item is already favorited
+        
+        if (user_data == null) {
                 user_data = {favorites: []}
             }
-        user_data = JSON.parse(user_data);
+        else {
+                user_data = JSON.parse(user_data);
+        }
+
+        //console.log(user_data);
         for(var i = 0;i<user_data.favorites.length;i++){
                 if(user_data.favorites[i] == id){
                         user_data.favorites.splice(i,1);
+                        isAdded = true;
                 }
         }
-
+        if(isAdded == false){
         user_data.favorites.push(id);
+        }
         user_data = JSON.stringify(user_data);
         localStorage.setItem(username, user_data);
 }

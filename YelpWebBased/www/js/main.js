@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function(){
     dohome();
     document.getElementById('signout').addEventListener('click', signOut, false);
     document.getElementById('search').addEventListener('click', dosearch, false);
+    document.getElementById('favorites').addEventListener('click', dofavorites, false);
 });
 
 function xmlRequest(url,onSuccess,onFailure){
