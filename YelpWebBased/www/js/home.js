@@ -21,6 +21,7 @@ var dohome = function(){ //Generate The UI Of The Home Page
 
     // If/Else to check if the user is already signed in
     if(signedIn == false){
+    
     //Insert Sign-in button
     let signInButton = document.createElement("button");
     signInButton.classList = "btn btn-primary"
@@ -42,6 +43,7 @@ var dohome = function(){ //Generate The UI Of The Home Page
     }else {
         console.log("Already Signed in");
     }
+
 
     document.getElementById('signIn').addEventListener('click', signIn, false);
     document.getElementById('signUp').addEventListener('click', signUp, false);

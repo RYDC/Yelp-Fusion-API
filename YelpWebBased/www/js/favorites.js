@@ -12,8 +12,8 @@ var dofavorites = function() {
     var username = sessionStorage.getItem("username");
     var user_data = localStorage.getItem(username);
     user_data = JSON.parse(user_data);
-    console.log(user_data.favorites.length);
-    console.log(user_data);
+    //console.log(user_data.favorites.length);
+    //console.log(user_data);
     if(user_data == null){
         console.log("Favorites not yet initialized");
     }else {
@@ -53,13 +53,35 @@ function onFavoriteSuccess(data){
     //button.id = data.businesses[i].id;
     button.setAttribute("id",data.id);
     button.onclick = favoriteItem;
-    button.innerHTML = "Favorite";
+    button.classList = "btn btn-danger"
     li.appendChild(button);
+
+    let favIcon = document.createElement("icon");
+    favIcon.classList = "fa fa-heart";
+    button.appendChild(favIcon);
 
     //Rating
     let rating = document.createElement("p");
-    rating.innerHTML = data.rating+"/5";
+    for(let counter = data.rating;counter>0;counter--){
+        //console.log(counter);
+        let span = document.createElement("span");
+        if(counter>1){
+                span.classList = "fa fa-star checked"
+        }else if(counter>0.5){
+                span.classList = "fa fa-star-half"
+        }else {
+                //console.log("nostar");
+        }
+        rating.append(span);
+}
     li.appendChild(rating);
+
+    /*let mapDiv = document.createElement('div');
+    li.append(mapDiv);
+    mapDiv.style.display = "none"
+    let map = new Gmap(data.coordinates.latitude,data.coordinates.longitude,14,250,250);
+    li.appendChild(map);*/
+
 }
 
 function onFavoriteFailure(){

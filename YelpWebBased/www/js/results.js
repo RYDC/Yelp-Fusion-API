@@ -31,14 +31,56 @@ var doresults = function(data) {//Print the Results of the search
                 let button = document.createElement("button");
                 //button.id = data.businesses[i].id;
                 button.setAttribute("id",data.businesses[i].id);
+
+                var username = sessionStorage.getItem("username");
+                var user_data = localStorage.getItem(username);
+                if(user_data!= null){
+                        user_data = JSON.parse(user_data);
+                        //console.log("Entered1");
+                        //console.log(user_data.favorites.length);
+                        for(var j = 0; j <= user_data.favorites.length;j++){  //Matching System to check if an item is favorited
+                                //console.log(user_data.favorites[j]+ " and " + data.businesses[i].id);
+                                //console.log("Entered2");
+                                if(user_data.favorites[j] == data.businesses[i].id){
+                                        button.classList = "btn btn-danger";
+                                        //console.log("match");
+                                        break;
+                                }else {
+                                        button.classList = "btn";
+                                }
+                        }
+                        //console.log("Entered3");
+                }else {
+                        button.classList = "btn";
+                }
                 button.onclick = favoriteItem;
-                button.innerHTML = "Favorite";
                 li.appendChild(button);
 
-                //Rating
+                let favIcon = document.createElement("icon");
+                favIcon.classList = "fa fa-heart";
+                button.appendChild(favIcon);
+
+                //Rating System
                 let rating = document.createElement("p");
-                rating.innerHTML = data.businesses[i].rating+"/5";
+                for(let counter = data.businesses[i].rating;counter>0;counter--){
+                        //console.log(counter);
+                        let span = document.createElement("span");
+                        if(counter>1){
+                                span.classList = "fa fa-star checked"
+                        }else if(counter>0.5){
+                                span.classList = "fa fa-star-half"
+                        }else {
+                                //console.log("nostar");
+                        }
+                        rating.append(span);
+                }
                 li.appendChild(rating);
+
+                let mapDiv = document.createElement('div');
+                li.append(mapDiv);
+                mapDiv.style.display = "none"
+                let map = new Gmap(data.businesses[i].coordinates.latitude,data.businesses[i].coordinates.longitude,15,250,250);
+                li.appendChild(map);
 
 
 
@@ -49,9 +91,15 @@ var doresults = function(data) {//Print the Results of the search
 function favoriteItem() {//Favorite an item and unfavorite an item
         var username = sessionStorage.getItem("username");
         var id = this.getAttribute("id");
+        //this.setAttribute("class","btn btn-danger");
         var user_data = localStorage.getItem(username);
         //console.log(user_data);
         let isAdded = false; //Checker to see if an item is already favorited
+        if(this.getAttribute("class") == "btn btn-danger"){
+                this.setAttribute("class","btn");
+        }else {
+                this.setAttribute("class","btn btn-danger");
+        }
         
         if (user_data == null) {
                 user_data = {favorites: []}

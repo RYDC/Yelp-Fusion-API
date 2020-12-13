@@ -39,7 +39,28 @@ function signUp(){//Creates UI for signing up
     signUpButton2.innerHTML = "Sign Up"
     container3.appendChild(signUpButton2);
 
+    //Insert a <br> tag
+    let br2 = document.createElement('br');
+    workarea.appendChild(br2);
+
+    //Create Div for encapsulating Back Button
+    let container4 = document.createElement("div");
+    container4.classList = "container d-flex justify-content-center";
+    workarea.appendChild(container4);
+    
+    //Insert Back Button
+    let backButton = document.createElement("button");
+    backButton.classList = "btn";
+    backButton.id = "back";
+    container4.appendChild(backButton);
+    
+    //Back Icon
+    let backIcon = document.createElement("icon");
+    backIcon.classList = "fa fa-long-arrow-left";
+    backButton.appendChild(backIcon);
+
     document.getElementById('signUp2').addEventListener('click', serverSignUp, false);
+    document.getElementById('back').addEventListener('click', dohome, false);
 }
 
 function signIn(){//creates UI for signing in
@@ -75,6 +96,7 @@ function signIn(){//creates UI for signing in
     passwordInput.id = "password"
     passwordInput.classList = "form-control col-sm-2 d-flex justify-content-center";
     passwordInput.placeholder = "Password";
+    passwordInput.type = "password";
     container2.appendChild(passwordInput);
 
     let signInButton2 = document.createElement("button");
@@ -83,7 +105,28 @@ function signIn(){//creates UI for signing in
     signInButton2.innerHTML = "Sign In"
     container3.appendChild(signInButton2);
 
+    //Insert a <br> tag
+    let br2 = document.createElement('br');
+    workarea.appendChild(br2);
+
+    //Create Div for encapsulating Back Button
+    let container4 = document.createElement("div");
+    container4.classList = "container d-flex justify-content-center";
+    workarea.appendChild(container4);
+    
+    //Insert Back Button
+    let backButton = document.createElement("button");
+    backButton.classList = "btn";
+    backButton.id = "back";
+    container4.appendChild(backButton);
+    
+    //Back Icon
+    let backIcon = document.createElement("icon");
+    backIcon.classList = "fa fa-long-arrow-left";
+    backButton.appendChild(backIcon);
+
     document.getElementById('signIn2').addEventListener('click', serverSignIn, false);
+    document.getElementById('back').addEventListener('click', dohome, false);
 }
 
 function serverSignUp() {//Request a Sign Up through API
