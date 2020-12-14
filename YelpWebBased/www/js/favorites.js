@@ -91,20 +91,24 @@ function onFavoriteSuccess(data){
     rating.classList+= "paddingtop";
     container2.appendChild(rating);
 
+    //Creating Map
     let mapDiv = document.createElement('div');
     li.append(mapDiv);
     mapDiv.style.display = "none"
     let map = new Gmap(data.coordinates.latitude,data.coordinates.longitude,14,175,175,data.location.display_address);
     container.appendChild(map);
 
+    //Address
     let address = document.createElement("p");
     address.innerHTML = "Address: "+data.location.display_address;
     li.appendChild(address);
 
+    //Phone
     let phone = document.createElement("p");
     phone.innerHTML = "Phone: " + data.display_phone;
     li.appendChild(phone);
 
+    //If Else to determine if a business is closed/open
     let openClosed = document.createElement("p");
     if(data.is_closed == false){
             openClosed.style.color = "green";

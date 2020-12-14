@@ -31,6 +31,7 @@ function signUp(){//Creates UI for signing up
     passwordInput.id = "password";
     passwordInput.classList = "form-control col-sm-2 d-flex justify-content-center";
     passwordInput.placeholder = "Password";
+    passwordInput.type = "password";
     container2.appendChild(passwordInput);
 
     let signUpButton2 = document.createElement("button");
