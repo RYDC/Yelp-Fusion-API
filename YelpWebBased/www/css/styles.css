@@ -35,6 +35,10 @@ footer p {
 }
 
 .listviewImage {
-    width:200px;
-    height:200px;
+    width:175px;
+    height:175px;
+}
+
+.paddingtop {
+    padding-top:15px;
 }

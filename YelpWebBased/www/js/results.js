@@ -16,16 +16,30 @@ var doresults = function(data) {//Print the Results of the search
                 li.classList = "list-group-item";
                 ul.appendChild(li);
 
-                //Business Image
-                let img = document.createElement("img");
-                img.classList = "listviewImage";
-                img.src = data.businesses[i].image_url;
-                li.appendChild(img);
-                
                 //Header
                 let h2 = document.createElement("h2");
                 h2.innerHTML = data.businesses[i].name;
                 li.appendChild(h2);
+
+                //Container for Image and Map
+                let container = document.createElement("div");
+                container.classList = "d-flex";
+                li.appendChild(container);
+
+                //Business Image
+                let img = document.createElement("img");
+                img.classList = "listviewImage";
+                img.src = data.businesses[i].image_url;
+                container.appendChild(img);
+                
+                //Insert a <br> tag
+                let br = document.createElement('br');
+                li.appendChild(br);
+
+                //Container for Favorite and Ratings
+                let container2 = document.createElement("div");
+                container2.classList = "d-flex";
+                li.appendChild(container2);
 
                 //Favorite Button
                 let button = document.createElement("button");
@@ -54,11 +68,16 @@ var doresults = function(data) {//Print the Results of the search
                         button.classList = "btn";
                 }
                 button.onclick = favoriteItem;
-                li.appendChild(button);
+                container2.appendChild(button);
 
                 let favIcon = document.createElement("icon");
                 favIcon.classList = "fa fa-heart";
                 button.appendChild(favIcon);
+
+                //Insert NBSP
+                let NBSP = document.createElement("p");
+                NBSP.innerHTML = "&nbsp;";
+                container2.appendChild(NBSP);
 
                 //Rating System
                 let rating = document.createElement("p");
@@ -74,15 +93,32 @@ var doresults = function(data) {//Print the Results of the search
                         }
                         rating.append(span);
                 }
-                li.appendChild(rating);
+                rating.classList+= "paddingtop";
+                container2.appendChild(rating);
 
-                let mapDiv = document.createElement('div');
+                let mapDiv = document.createElement('div');//Map
                 li.append(mapDiv);
                 mapDiv.style.display = "none"
-                let map = new Gmap(data.businesses[i].coordinates.latitude,data.businesses[i].coordinates.longitude,15,250,250);
-                li.appendChild(map);
+                let map = new Gmap(data.businesses[i].coordinates.latitude,data.businesses[i].coordinates.longitude,15,175,175,data.businesses[i].location.display_address);
+                container.appendChild(map);
 
+                let address = document.createElement("p");
+                address.innerHTML = "Address: "+data.businesses[i].location.display_address;
+                li.appendChild(address);
 
+                let phone = document.createElement("p");
+                phone.innerHTML = "Phone: " + data.businesses[i].display_phone;
+                li.appendChild(phone);
+
+                let openClosed = document.createElement("p");
+                if(data.businesses[i].is_closed == false){
+                        openClosed.style.color = "green";
+                        openClosed.innerHTML = "Open";
+                }else {
+                        openClosed.style.color = "Red";
+                        openClosed.innerHTML = "Closed";
+                }
+                li.appendChild(openClosed);
 
         }
         

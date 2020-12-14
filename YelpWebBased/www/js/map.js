@@ -1,6 +1,7 @@
 class Gmap extends HTMLIFrameElement{
-    constructor(latitude,longitude,zoom,height,width){
+    constructor(latitude,longitude,zoom,height,width,waypoint){
         super();
+        this.waypoint = waypoint;
         this.lat = latitude.toString();
         this.lon = longitude.toString();
         this.zoomv = zoom;
@@ -13,7 +14,9 @@ class Gmap extends HTMLIFrameElement{
         
     }
     getSrc(){
-        return "https://www.google.com/maps/embed/v1/view?key=" + this.API_KEY + "&center=" + this.lat + "," + this.lon + "&zoom=" + this.zoomv;
+        //return "https://www.google.com/maps/embed/v1/view?key=" + this.API_KEY + "&center=" + this.lat + "," + this.lon + "&zoom=" + this.zoomv +"&destination="+this.waypoint;
+        return "https://www.google.com/maps/embed/v1/place?key="+this.API_KEY+"&q="+this.waypoint;
+        //return "https://www.google.com/maps/embed/v1/search?key="+this.API_KEY+"&q="+this.waypoint
     }
 
 }
