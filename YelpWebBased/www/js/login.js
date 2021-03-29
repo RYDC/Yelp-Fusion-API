@@ -134,7 +134,7 @@ function serverSignUp() {//Request a Sign Up through API
     console.log("Starting Server Sign Up");
     var password = document.getElementById("password").value;
     var username = document.getElementById("username").value;
-    var url = "https://lamp.cse.fau.edu/~dbenne11/whendiagram/add_user.php?username="+username+"&pw="+password //Kudos to Daniel for providing an alternative to OAuth
+    var url = //add login api
     console.log(url);
     xmlRequest(url,onGoodSignUpRequest,onBadSignUpRequest);
 }
@@ -144,7 +144,7 @@ function serverSignIn() {//Request a Sign In through API
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
 
-    var url = "https://lamp.cse.fau.edu/~dbenne11/whendiagram/login.php?username="+username+"&pw="+password;
+    var url = //add login api
     console.log(url);
     xmlRequest(url,onGoodSignInRequest,onBadSignInRequest);
 }
